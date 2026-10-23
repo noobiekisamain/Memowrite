@@ -1,0 +1,21 @@
+# 10 - Fun with text
+
+set sentence to "the quick brown fox jumps over the lazy dog"
+say titlecase of sentence
+say "Words: {count_words(sentence)}, vowels: {count_vowels(sentence)}"
+say "Backwards: " + reversed(sentence)
+say "First word: " + first word of sentence + ", word 4: " + word 4 of sentence
+say replace(sentence, "dog", "cat")
+say "Secret code: " + caesar("Meet me at noon", 3)
+say "Decoded: " + decode_caesar(caesar("Meet me at noon", 3), 3)
+say "SOS in morse: " + morse("sos")
+say "Is 'racecar' a palindrome? " + is_palindrome("racecar")
+say banner("MEMO")
+say box("Memowrite can draw boxes" + "\n" + "around text!", "round")
+say progress_bar(65, 100, 30)
+say "A strong password: " + password(14)
+say "Today is " + format_date(today())
+say ordinal(21) + " " + ordinal(2) + " " + ordinal(13)
+color text "green"
+say "Green text!"
+color text "normal"

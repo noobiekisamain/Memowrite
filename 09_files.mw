@@ -1,0 +1,24 @@
+# 09 - Reading and writing files
+
+write "Shopping list" to file "shopping.txt"
+add "- milk" to file "shopping.txt"
+add "- bread" to file "shopping.txt"
+append "- apples" to file "shopping.txt"
+
+read file "shopping.txt" into text
+say text
+read lines of file "shopping.txt" into lines
+say "The list has {length of lines} lines."
+
+make list highscores with 120, 340, 95
+save highscores to "scores.json"
+load "scores.json" into loaded
+say "Loaded scores: {loaded} (best {max(loaded)})"
+
+save [["name", "age"], ["Ada", 36], ["Alan", 41]] to "people.csv"
+load "people.csv" into people
+say table(people)
+
+if file_exists("shopping.txt") then say "shopping.txt is {file_size("shopping.txt")} bytes."
+say "Text files here: " + search_files("*.txt")
+delete file "shopping.txt"

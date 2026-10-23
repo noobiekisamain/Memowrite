@@ -1,0 +1,24 @@
+# 23 - Generative art: random shapes saved as a PNG picture
+# (works without a window: "make picture" draws off-screen)
+
+make picture art sized 800 by 500 background "night"
+seed(2026)
+repeat 160 times
+    set x to random number from 0 to 800
+    set y to random number from 0 to 500
+    set c to hsl(random(180, 330), 80, random(40, 70))
+    check random number from 1 to 4
+        is 1
+            draw circle on art at x, y size random(4, 40) color c
+        is 2
+            draw star on art at x, y size random(6, 26) color c angle random(0, 72)
+        is 3
+            draw hexagon on art at x, y size random(6, 30) outline c width 2 color nothing
+        otherwise
+            draw line on art from x, y to x + random(-60, 60), y + random(-60, 60) color c width random(1, 5)
+    end
+end
+export art to "generated_art.png"
+export art to "generated_art.svg"
+say "Saved generated_art.png and generated_art.svg - open them to see your art!"
+open "generated_art.png"

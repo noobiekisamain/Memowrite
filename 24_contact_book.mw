@@ -1,0 +1,53 @@
+# 24 - A contact book with a table, saved in File.Memory
+
+make window app titled "Contact Book" sized 560 by 500
+add heading to app saying "Contacts"
+add panel form to app saying "New contact"
+add input box nameBox to form saying "Name"
+add input box phoneBox to form saying "Phone"
+add dropdown groupBox to form with ["Family", "Friends", "Work"]
+add button to form saying "Add contact" doing add_contact
+add table people to app columns "Name", "Phone", "Group" rows 8
+add row actions to app
+add button to actions saying "Delete selected" doing delete_selected background "tomato"
+add button to actions saying "Sort by name" doing sort_people background "slategray"
+add label countLabel to app saying ""
+
+recall "contacts" into contacts or []
+refresh()
+
+make task add_contact
+    if text of nameBox is empty then
+        show warning "Please type a name"
+        give back
+    end
+    put {"name": text of nameBox, "phone": text of phoneBox, "group": text of groupBox} into contacts
+    set text of nameBox to ""
+    set text of phoneBox to ""
+    refresh()
+end
+
+make task delete_selected
+    set row to value of people
+    if row is nothing then give back
+    set keep to []
+    for each c in contacts
+        if c["name"] is not row[1] then put c into keep
+    end
+    set contacts to keep
+    refresh()
+end
+
+make task sort_people
+    set contacts to sort_by(contacts, "name")
+    refresh()
+end
+
+make task refresh
+    clear people
+    for each c in contacts
+        add [c["name"], c["phone"], c["group"]] to people
+    end
+    remember "contacts" as contacts
+    set text of countLabel to plural(length of contacts, "contact")
+end

@@ -1,0 +1,209 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Memowrite",
+  "scopeName": "source.memowrite",
+  "fileTypes": [
+    "mw"
+  ],
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#task-def"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#constants"
+    },
+    {
+      "include": "#line-start"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#builtins"
+    },
+    {
+      "include": "#shapes"
+    },
+    {
+      "include": "#words"
+    },
+    {
+      "include": "#operators"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.note.memowrite",
+          "match": "(?i)^\\s*note\\b.*$"
+        },
+        {
+          "name": "comment.line.number-sign.memowrite",
+          "match": "#.*$"
+        },
+        {
+          "name": "comment.line.double-slash.memowrite",
+          "match": "//.*$"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.memowrite",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.memowrite",
+              "match": "\\\\."
+            },
+            {
+              "name": "meta.interpolation.memowrite",
+              "begin": "\\{",
+              "end": "\\}",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.interpolation.begin.memowrite"
+                }
+              },
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.section.interpolation.end.memowrite"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "$self"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.memowrite",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.memowrite",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "task-def": {
+      "patterns": [
+        {
+          "match": "(?i)\\b(make|define)\\s+(?:a\\s+|an\\s+)?(task|function|kind|model)\\s+(?:called\\s+)?([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "storage.type.memowrite"
+            },
+            "2": {
+              "name": "storage.type.memowrite"
+            },
+            "3": {
+              "name": "entity.name.function.memowrite"
+            }
+          }
+        },
+        {
+          "match": "(?i)\\b(make)\\s+(?:a\\s+|an\\s+)?(list|book|window|app|canvas|picture)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "storage.type.memowrite"
+            },
+            "2": {
+              "name": "storage.type.memowrite"
+            },
+            "3": {
+              "name": "variable.other.memowrite"
+            }
+          }
+        },
+        {
+          "match": "(?i)\\b(called|named)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "keyword.other.memowrite"
+            },
+            "2": {
+              "name": "variable.other.memowrite"
+            }
+          }
+        },
+        {
+          "match": "(?i)\\b(doing|do|run|call)\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*$",
+          "captures": {
+            "1": {
+              "name": "keyword.control.memowrite"
+            },
+            "2": {
+              "name": "entity.name.function.memowrite"
+            }
+          }
+        }
+      ]
+    },
+    "numbers": {
+      "name": "constant.numeric.memowrite",
+      "match": "\\b\\d[\\d_]*(\\.\\d+)?\\b"
+    },
+    "constants": {
+      "name": "constant.language.memowrite",
+      "match": "(?i)\\b(yes|no|true|false|on|off|nothing|none|pi)\\b"
+    },
+    "line-start": {
+      "match": "(?i)^\\s*(say|print|tell|display|output|echo|shout|whisper|debug|ask|set|change|increase|decrease|add|subtract|take|multiply|divide|swap|put|insert|push|remove|sort|shuffle|reverse|empty|remember|recall|forget|store|keep|write|save|append|read|load|delete|erase|copy|rename|open|download|fetch|clear|beep|play|speak|color|colour|show|hide|alert|close|focus|enable|disable|menu|draw|paint|plot|fill|place|stamp|move|go|jump|slide|rotate|turn|spin|scale|grow|shrink|resize|flip|recolor|export|bring|send|animate|bounce|note|pass)\\b",
+      "captures": {
+        "1": {
+          "name": "keyword.other.command.memowrite"
+        }
+      }
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.memowrite",
+          "match": "(?i)\\b(if|otherwise|else|elif|then|end|done|repeat|times|time|while|until|forever|loop|for|each|every|count|from|to|by|down|stop|skip|next|continue|break|give|back|return|answer|try|fails|failed|catch|complain|fail|ensure|check|unless|when|after|do|doing|call|run|quit|exit|wait|pause|sleep|use|include|import|in|of|it)\\b"
+        },
+        {
+          "name": "storage.type.memowrite",
+          "match": "(?i)\\b(make|create|define|task|function|kind|list|book|window|app|model|sprite|canvas|picture|drawing|folder|let)\\b"
+        }
+      ]
+    },
+    "builtins": {
+      "match": "(?i)\\b(greatest_common_divisor|seconds_since_1970|memowrite_version|capitalize_words|documents_folder|downloads_folder|looks_like_email|operating_system|remembered_names|matches_pattern|number_to_words|random_password|seconds_running|countdown_text|desktop_folder|engine_version|file_extension|letter_of_code|pick_save_file|program_folder|window_is_open|all_but_first|angle_between|canvas_height|computer_name|count_of_text|decode_base64|decode_caesar|encode_base64|encode_caesar|file_modified|first_letters|folder_exists|format_number|is_palindrome|make_password|no_duplicates|otherwise_use|random_colour|random_number|remove_spaces|screen_height|sentence_case|touching_edge|canvas_width|count_vowels|days_between|each_changed|is_leap_year|keep_between|keys_pressed|last_letters|milliseconds|numbers_from|only_letters|only_numbers|point_inside|progress_bar|random_color|recall_value|running_time|screen_width|search_files|spell_number|begins_with|count_lines|count_words|day_of_week|environment|file_exists|fingerprint|format_date|from_binary|hexadecimal|home_folder|memory_keys|most_common|occurrences|only_digits|pick_folder|position_of|pretty_date|random_item|random_name|random_word|regex_match|repeat_text|secret_code|shape_count|starts_with|this_folder|wholenumber|with_commas|capitalise|capitalize|characters|color_code|days_until|dictionary|fetch_json|first_line|first_word|folders_in|index_list|is_letters|is_nothing|is_numeric|mix_colors|model_from|month_name|naturallog|palindrome|parse_json|percentage|regex_find|remembered|shout_text|split_text|squareroot|startswith|title_case|word_count|backwards|call_task|char_code|clipboard|coin_flip|cpu_count|direction|duplicate|ends_with|every_one|factorial|fibonacci|file_name|file_size|fill_list|flip_coin|from_code|from_json|full_path|groups_of|in_memory|is_letter|is_number|last_line|last_word|leap_year|logarithm|lowercase|make_book|make_grid|make_list|middle_of|pad_right|parse_csv|pick_file|read_file|remembers|roll_dice|rounddown|sort_list|substring|swap_text|timestamp|titlecase|transform|underline|unique_id|uppercase|yes_or_no|absolute|add_days|age_from|all_true|any_true|capitals|contains|count_of|currency|day_name|distance|distinct|duration|endswith|files_in|find_all|from_csv|from_hex|group_by|has_text|how_many|in_words|includes|index_of|is_alpha|is_email|is_lower|is_prime|is_upper|is_vowel|isnumber|key_down|language|names_in|nospaces|numbered|pad_left|password|position|positive|repeated|replaced|reversed|run_task|set_seed|shuffled|smallest|time_now|to_morse|tonumber|touching|url_name|username|where_is|average|biggest|ceiling|code_of|combine|confirm|copy_of|default|degrees|elapsed|fill_in|first_n|flatten|grid_of|has_key|highest|integer|is_book|is_even|is_list|is_none|is_text|kind_of|largest|letters|lighter|line_at|list_of|matches|mouse_x|mouse_y|numbers|or_else|ordinal|pair_up|percent|radians|replace|reverse|rounded|roundup|sort_by|tangent|to_json|trimmed|version|weekday|what_is|word_at|add_up|any_of|arccos|arcsin|arctan|banner|base64|binary|caesar|center|centre|chance|choose|commas|cosine|counts|darker|fields|filter|format|get_or|indent|is_odd|joined|length|lookup|lowest|median|memory|merged|middle|minute|ms_now|number|plural|random|reduce|second|select|skip_n|sorted|string|to_csv|tolist|totext|typeof|unique|values|ascii|blend|chars|chunk|clamp|clock|clone|count|fetch|first|floor|least|limit|lines|lower|merge|money|month|morse|power|prime|range|right|round|slice|split|stars|strip|table|tally|timer|today|total|truth|upper|whole|words|acos|asin|atan|book|bool|ceil|char|copy|date|dice|drop|even|find|fold|glue|hash|hour|join|json|keep|keys|last|left|lerp|list|mean|mode|only|part|pick|rand|rest|roll|root|seed|sign|sine|size|slug|sqrt|take|text|tidy|time|trim|type|uuid|wrap|year|abs|age|all|any|box|cos|day|exp|fib|gcd|get|has|hex|hsl|int|lcm|len|log|map|max|min|mix|now|num|odd|pad|pow|rgb|sin|str|sum|tan|zip|ln|e)\\b(?=\\s*\\(|\\s+of\\b)",
+      "captures": {
+        "1": {
+          "name": "support.function.builtin.memowrite"
+        }
+      }
+    },
+    "shapes": {
+      "name": "entity.name.type.shape.memowrite",
+      "match": "(?i)\\b(circle|ellipse|oval|rectangle|rect|box|square|line|triangle|polygon|star|text|dot|pixel|arc|heart|image|arrow|hexagon|pentagon|diamond|path|grid|ring|roundbox|label|heading|button|input|password|textbox|checkbox|slider|dropdown|listbox|table|panel|row|tabs|tab|progress|spinner|radio|link|separator|space|colorpicker)\\b"
+    },
+    "words": {
+      "name": "keyword.operator.word.memowrite",
+      "match": "(?i)\\b(is|are|was|not|and|or|more|greater|bigger|higher|larger|less|smaller|lower|fewer|than|at|least|most|equal|equals|same|as|between|contains|has|does|starts|ends|begins|with|touches|plus|minus|divided|multiplied|mod|modulo|remainder|power|squared|cubed|joined|into|the|a|an|new|called|named|titled|sized|size|saying|color|colour|outline|width|thickness|radius|points|angle|font|bold|background|placeholder|tip|value|step|columns|rows|my|me|even|odd|divisible|inside|above|below|over|under|before|after)\\b"
+    },
+    "operators": {
+      "name": "keyword.operator.memowrite",
+      "match": "==|!=|>=|<=|[-+*/%^<>=&]"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+# shapes.mw - ready-made 2D models.  use "shapes"  then  place model house at 200, 200
+
+make model house
+    rectangle at -40, -20 size 80 by 60 color "beige" outline "saddlebrown" width 2
+    triangle at 0, -38 size 96 color "firebrick"
+    rectangle at -10, 12 size 20 by 28 color "saddlebrown"
+    square at -32, -10 size 16 color "lightblue"
+    square at 16, -10 size 16 color "lightblue"
+end
+
+make model tree
+    rectangle at -7, 0 size 14 by 40 color "wood"
+    circle at 0, -14 size 28 color "leaf"
+end
+
+make model flower
+    circle at 0, -12 size 6 color "pink"
+    circle at 0, 12 size 6 color "pink"
+    circle at -12, 0 size 6 color "pink"
+    circle at 12, 0 size 6 color "pink"
+    circle at 0, 0 size 7 color "gold"
+end
+
+make model cloud
+    ellipse at 0, 0 size 80 by 36 color "white"
+    ellipse at 22, -12 size 50 by 30 color "white"
+end
+
+make model rocket
+    roundbox at -12, -40 size 24 by 70 color "silver" corner 10
+    triangle at 0, -50 size 26 color "red"
+    triangle at -16, 26 size 18 color "red"
+    triangle at 16, 26 size 18 color "red"
+    circle at 0, -18 size 6 color "skyblue"
+end

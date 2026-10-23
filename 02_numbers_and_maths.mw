@@ -1,0 +1,28 @@
+# 02 - Numbers and maths, written in words or symbols
+
+set apples to 12
+set friends to 4
+say "Each friend gets {apples divided by friends} apples."
+
+say 7 plus 3
+say 7 minus 3
+say 7 times 3
+say 7 divided by 2
+say 2 to the power of 8
+say 17 mod 5
+say the square root of 144
+say round(3.14159, 2)
+say "A random dice roll: " + dice()
+say "A random number from 1 to 100: " + random number from 1 to 100
+
+set total to 0
+add 10 to total
+change total by 5
+multiply total by 2
+take 3 from total
+say "total is now {total}"
+
+say "Is 7 a prime number? " + is_prime(7)
+say "12 in words: " + spell_number(12)
+say "1234567 with commas: " + commas(1234567)
+say "The average of 4, 8 and 15 is " + average(4, 8, 15)

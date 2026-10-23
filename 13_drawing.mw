@@ -1,0 +1,31 @@
+# 13 - Drawing a picture with shapes
+
+make window art titled "A sunny day" sized 640 by 460
+add canvas board to art sized 620 by 420 background "sky"
+
+# ground and sun
+draw rectangle on board at 0, 320 size 620 by 100 color "grass"
+draw circle at 540, 80 size 45 color "sun"
+draw ring at 540, 80 size 58 color "gold" width 4
+
+# a house
+draw rectangle at 120, 210 size 160 by 110 color "beige" outline "saddlebrown" width 3
+draw triangle at 200, 175 size 190 color "firebrick"
+draw rectangle at 180, 260 size 40 by 60 color "saddlebrown"
+draw square at 135, 235 size 30 color "lightblue" outline "white" width 3
+draw square at 235, 235 size 30 color "lightblue" outline "white" width 3
+
+# clouds, stars, a heart and some text
+for each spot in [[90, 70], [300, 50], [400, 110]]
+    draw ellipse at spot[1], spot[2] size 90 by 40 color "white"
+    draw ellipse at spot[1] + 30, spot[2] - 12 size 60 by 34 color "white"
+end
+draw heart at 420, 260 size 50
+draw star at 360, 200 size 18 color "gold" angle 15
+draw line from 300, 330 to 600, 330 color "darkgreen" width 3 dashed
+draw arrow from 470, 380 to 560, 380 color "navy" width 4
+draw text at 310, 395 saying "Made with Memowrite" size 18 bold color "darkgreen"
+
+export board to "sunny_day.png"
+export board to "sunny_day.svg"
+say "Saved the picture as sunny_day.png and sunny_day.svg"

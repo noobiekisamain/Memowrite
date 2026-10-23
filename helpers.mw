@@ -1,0 +1,43 @@
+# helpers.mw - handy tasks you can borrow with:  use "helpers"
+
+# Ask until the user types a number
+make task ask_number with question
+    repeat forever
+        ask question into answer
+        if answer is a number then give back number(answer)
+        say "Please type a number."
+    end
+end
+
+# Ask a yes/no question in the console
+make task ask_yes_no with question
+    ask question + " (yes/no)" into answer
+    give back lowercase of text(answer) starts with "y"
+end
+
+# Show a numbered menu and give back the chosen item
+make task choose_from with question, options
+    say question
+    for each i, option in options
+        say "  {i}. {option}"
+    end
+    repeat forever
+        set choice to ask_number("Pick a number:")
+        if choice is between 1 and length of options then give back options[choice]
+        say "Pick from 1 to {length of options}."
+    end
+end
+
+# Wait until Enter is pressed
+make task press_enter
+    ask "Press Enter to carry on..." into ignored as text
+end
+
+# Type text out slowly, like a story
+make task type_slowly with words, delay
+    for each letter in words
+        say letter without newline
+        wait default(delay, 30) milliseconds
+    end
+    say
+end

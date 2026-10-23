@@ -1,0 +1,36 @@
+# 25 - A little solar system: rotating 2D models with sin and cos
+
+make window space titled "Solar System" sized 620 by 680 color "black"
+add canvas sky to space sized 600 by 600 background "black"
+
+repeat 120 times
+    draw dot on sky at random(0, 600), random(0, 600) size random(1, 2) color "white"
+end
+draw circle on sky at 300, 300 size 34 color "gold"
+draw ring on sky at 300, 300 size 44 color "orange" width 3
+
+make list planets with ...
+    {"name": "Mercury", "distance": 60, "size": 6, "color": "silver", "speed": 4.1}, ...
+    {"name": "Venus", "distance": 95, "size": 9, "color": "wheat", "speed": 1.6}, ...
+    {"name": "Earth", "distance": 135, "size": 10, "color": "dodgerblue", "speed": 1}, ...
+    {"name": "Mars", "distance": 175, "size": 8, "color": "orangered", "speed": 0.53}, ...
+    {"name": "Jupiter", "distance": 235, "size": 20, "color": "sandybrown", "speed": 0.08}
+
+for each p in planets
+    draw ring on sky at 300, 300 size p["distance"] color "#222244" width 1
+    draw circle on sky at 300 + p["distance"], 300 size p["size"] color p["color"] called body
+    set p["shape"] to body
+end
+add label info to space saying "Earth year: 0" color "white"
+
+set days to 0
+every 30 milliseconds do orbit
+
+make task orbit
+    add 2 to days
+    for each p in planets
+        set angle to days * p["speed"]
+        move p["shape"] to 300 + p["distance"] * cos(angle), 300 + p["distance"] * sin(angle)
+    end
+    set text of info to "Earth year: " + round(days / 360, 1)
+end

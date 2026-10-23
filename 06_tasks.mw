@@ -1,0 +1,26 @@
+# 06 - Make your own commands with tasks
+
+make task greet with who
+    say "Hello, {who}!"
+end
+
+make task area with width, height
+    give back width * height
+end
+
+make task factorial_of with n
+    if n is at most 1 then give back 1
+    give back n * factorial_of(n - 1)
+end
+
+do greet with "Ada"
+greet("Linus")
+say "A 5 by 3 room is {area(5, 3)} square meters."
+say "6! = " + factorial_of(6)
+
+# tasks can be used before they are written
+say shout("tasks are fun")
+
+make task shout with words
+    give back uppercase of words + "!!!"
+end

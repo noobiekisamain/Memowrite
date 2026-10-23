@@ -1,0 +1,19 @@
+{
+  "comments": { "lineComment": "#" },
+  "brackets": [["[", "]"], ["(", ")"], ["{", "}"]],
+  "autoClosingPairs": [
+    { "open": "[", "close": "]" },
+    { "open": "(", "close": ")" },
+    { "open": "{", "close": "}" },
+    { "open": "\"", "close": "\"", "notIn": ["string", "comment"] }
+  ],
+  "surroundingPairs": [["[", "]"], ["(", ")"], ["{", "}"], ["\"", "\""], ["'", "'"]],
+  "wordPattern": "[A-Za-z_][A-Za-z0-9_]*|-?\\d+(?:\\.\\d+)?",
+  "indentationRules": {
+    "increaseIndentPattern": "^\\s*((if\\b(?!.*\\bthen\\s+\\S).*)|repeat\\b.*|while\\b.*|until\\b.*|forever\\s*|loop\\s*|for each\\b.*|count\\b.*|make (a |an )?(task|function|model|kind)\\b.*|to \\w.*|task\\b.*|try\\b.*|if it fails.*|otherwise.*|else.*|check\\b.*|is\\b.*|unless\\b.*|every\\b(?!.*\\b(do|doing)\\s+\\w+\\s*$).*|after\\b(?!.*\\bdo\\s+\\w+\\s*$).*|when\\b(?!.*\\b(do|doing)\\s+\\w+\\s*$).*)\\s*$",
+    "decreaseIndentPattern": "^\\s*(end\\b.*|done\\s*|otherwise.*|else.*|if it fails.*)$"
+  },
+  "folding": {
+    "markers": { "start": "^\\s*#\\s*region\\b", "end": "^\\s*#\\s*endregion\\b" }
+  }
+}

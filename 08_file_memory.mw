@@ -1,0 +1,24 @@
+# 08 - File.Memory: things your program remembers forever
+# Every program has a File.Memory file next to it. Run this program
+# a few times and watch the numbers go up!
+
+recall "runs" into runs or 0
+add 1 to runs
+remember "runs" as runs
+say "This program has run {runs} time(s)."
+
+recall "visitors" into visitors or []
+ask "Who are you?" into name
+if visitors contains name then
+    say "Welcome back, {name}!"
+otherwise
+    put name into visitors
+    remember "visitors" as visitors
+    say "Nice to meet you, {name}. I will remember you."
+end
+say "Everyone I remember: " + join(visitors, ", ")
+
+remember "last visit" as now()
+say "Things in my memory: " + memory_keys()
+# forget "runs"           <- would forget one thing
+# forget everything       <- would wipe File.Memory

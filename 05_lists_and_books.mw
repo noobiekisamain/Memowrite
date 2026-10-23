@@ -1,0 +1,32 @@
+# 05 - Lists (numbered things) and books (named things)
+
+make list fruits with "banana", "apple", "cherry"
+put "mango" into fruits
+add "kiwi" to fruits
+say fruits
+say "First fruit: " + item 1 of fruits
+say "Last fruit: " + last of fruits
+say "How many: " + length of fruits
+sort fruits
+say "Sorted: " + join(fruits, ", ")
+remove "apple" from fruits
+say "Without apple: {fruits}"
+if fruits contains "kiwi" then say "We have kiwi!"
+say "Random pick: " + pick(fruits)
+
+make list scores with 4, 9, 2, 7
+say "Biggest {max(scores)}, smallest {min(scores)}, total {sum(scores)}"
+say "Doubled: " + map(scores, double)
+
+make task double with n
+    give back n * 2
+end
+
+make book pet with name as "Rex", kind as "dog", age as 3
+say pet
+say "{name of pet} is a {pet.kind} aged {pet["age"]}"
+set pet["age"] to 4
+set favourite of pet to "bones"
+for each key in keys of pet
+    say key + " -> " + pet[key]
+end

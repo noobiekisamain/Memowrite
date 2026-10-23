@@ -1,0 +1,45 @@
+# 17 - A paint app: draw with the mouse, pick colors, save your picture
+
+make window paint titled "Memowrite Paint" sized 760 by 560
+add row tools to paint
+add label to tools saying "Brush:"
+add dropdown colorPick to tools with ["black", "red", "orange", "gold", "green", "royalblue", "purple", "white"]
+add slider brushSize to tools from 1 to 30 value 6
+add button to tools saying "Clear" doing wipe background "gray"
+add button to tools saying "Save PNG" doing save_picture background "seagreen"
+add canvas board to paint sized 740 by 470 background "white"
+
+set lastX to nothing
+set lastY to nothing
+when mouse is dragged on board do paint_line
+when mouse is released on board do lift_pen
+when mouse is clicked on board do paint_dot
+
+make task paint_dot with x, y
+    draw circle on board at x, y size value of brushSize / 2 color text of colorPick
+    set lastX to x
+    set lastY to y
+end
+
+make task paint_line with x, y
+    if lastX is nothing then
+        paint_dot(x, y)
+        give back
+    end
+    draw line on board from lastX, lastY to x, y color text of colorPick width value of brushSize
+    set lastX to x
+    set lastY to y
+end
+
+make task lift_pen with x, y
+    set lastX to nothing
+end
+
+make task wipe
+    clear board
+end
+
+make task save_picture
+    export board to "my_painting.png"
+    show message "Saved as my_painting.png in this program's folder."
+end

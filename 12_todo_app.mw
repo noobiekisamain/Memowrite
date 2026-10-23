@@ -1,0 +1,48 @@
+# 12 - A to-do list app that remembers your tasks in File.Memory
+
+make window app titled "My To-Do List" sized 420 by 480
+add heading title to app saying "Things to do"
+add input box newTask to app placeholder "What do you need to do?" doing add_task
+add row buttons to app
+add button addButton to buttons saying "Add" doing add_task
+add button doneButton to buttons saying "Done!" doing finish_task background "seagreen"
+add button clearButton to buttons saying "Clear all" doing clear_all background "gray"
+add list box todo to app rows 12
+add label status to app saying ""
+
+recall "todo" into saved or []
+set items of todo to saved
+update_status()
+
+make task add_task
+    set thing to trim of text of newTask
+    if thing is empty then give back
+    add thing to todo
+    set text of newTask to ""
+    save_list()
+end
+
+make task finish_task
+    if value of todo is nothing then
+        show message "Pick a task in the list first."
+        give back
+    end
+    remove value of todo from todo
+    save_list()
+end
+
+make task clear_all
+    if confirm("Remove everything?") then
+        clear todo
+        save_list()
+    end
+end
+
+make task save_list
+    remember "todo" as items of todo
+    update_status()
+end
+
+make task update_status
+    set text of status to plural(length of todo, "thing") + " to do - saved in File.Memory"
+end

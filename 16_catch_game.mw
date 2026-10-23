@@ -1,0 +1,55 @@
+# 16 - A game: catch the falling stars with the arrow keys!
+# Your high score is saved in File.Memory.
+
+make window game titled "Star Catcher" sized 520 by 600 fixed
+add label scoreLabel to game saying "Score: 0" bold
+add canvas sky to game sized 500 by 520 background "midnightblue"
+draw rectangle on sky at 0, 500 size 500 by 20 color "darkslateblue"
+
+make model basket
+    roundbox at -40, -12 size 80 by 24 color "sandybrown" corner 6
+    line from -40, -6 to 40, -6 color "saddlebrown" width 2
+end
+place model basket on sky at 250, 480 called player
+draw star on sky at 250, -20 size 14 color "gold" called star
+
+recall "star high score" into best or 0
+set score to 0
+set lives to 3
+set speed to 4
+drop_star()
+
+every 16 milliseconds do update
+
+make task update
+    if key_down("left") and left of player is more than 0 then move player by -7, 0
+    if key_down("right") and right of player is less than 500 then move player by 7, 0
+    move star by 0, speed
+    if star touches player then
+        add 1 to score
+        add 0.25 to speed
+        beep
+        drop_star()
+    otherwise if y of star is more than 520 then
+        take 1 from lives
+        drop_star()
+    end
+    set text of scoreLabel to "Score: {score}    Lives: {lives}    Best: {best}"
+    if lives is 0 then game_over()
+end
+
+make task drop_star
+    move star to random number from 20 to 480, -20
+    set color of star to pick("gold", "yellow", "orange", "white")
+end
+
+make task game_over
+    stop all timers
+    if score is more than best then
+        remember "star high score" as score
+        show message "NEW HIGH SCORE: {score}!"
+    otherwise
+        show message "Game over! You caught {score} stars."
+    end
+    close game
+end

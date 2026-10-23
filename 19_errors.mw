@@ -1,0 +1,31 @@
+# 19 - When things go wrong: try, if it fails, complain and ensure
+
+make task safe_divide with a, b
+    if b is 0 then complain "You can't share things between nobody!"
+    give back a / b
+end
+
+try
+    say safe_divide(10, 2)
+    say safe_divide(5, 0)
+    say "this line never runs"
+if it fails as problem
+    say "Something went wrong: " + problem
+end
+
+try
+    read file "this file is not here.txt" into text
+if it fails as problem
+    say "Could not read it: " + problem
+end
+
+set list_of_ages to [12, 40, 7]
+try
+    say item 10 of list_of_ages
+if it fails as problem
+    say problem
+end
+
+ask "Give me a number:" into n
+ensure n is a number or complain "That was not a number :("
+say "Twice your number is {n * 2}"

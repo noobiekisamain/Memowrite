@@ -1,0 +1,39 @@
+# 20 - A clock and stopwatch app using timers
+
+make window clock titled "Clock" sized 360 by 300 color "night"
+add heading timeNow to clock saying "" color "white" big
+add label dateNow to clock saying "" color "lightsteelblue"
+add separator to clock
+add label watch to clock saying "0:00" color "gold" big
+add row controls to clock
+add button to controls saying "Start" doing start_watch background "seagreen"
+add button to controls saying "Stop" doing stop_watch background "tomato"
+add button to controls saying "Reset" doing reset_watch background "slategray"
+
+set running to no
+set seconds to 0
+
+every 1 second do tick
+tick()
+
+make task tick
+    set text of timeNow to now()[12:]
+    set text of dateNow to format_date(today())
+    if running then
+        add 1 to seconds
+        set text of watch to duration(seconds)
+    end
+end
+
+make task start_watch
+    set running to yes
+end
+
+make task stop_watch
+    set running to no
+end
+
+make task reset_watch
+    set seconds to 0
+    set text of watch to "0:00"
+end

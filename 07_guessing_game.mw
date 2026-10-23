@@ -1,0 +1,29 @@
+# 07 - Guess the number. Your best score is kept in File.Memory!
+
+recall "best guesses" into best or 0
+set secret to random number from 1 to 100
+set tries to 0
+say "I'm thinking of a number from 1 to 100."
+if best is more than 0 then say "The record is {best} tries. Can you beat it?"
+
+repeat forever
+    ask "Your guess:" into guess
+    if guess is not a number then
+        say "That's not a number!"
+        skip
+    end
+    add 1 to tries
+    if guess is less than secret then
+        say "Higher!"
+    otherwise if guess is more than secret then
+        say "Lower!"
+    otherwise
+        say "Yes! It was {secret}. You needed {plural(tries, "try", "tries")}."
+        stop
+    end
+end
+
+if best is 0 or tries is less than best then
+    remember "best guesses" as tries
+    say "That's a NEW RECORD! Saved in File.Memory."
+end

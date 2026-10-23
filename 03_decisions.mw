@@ -1,0 +1,26 @@
+# 03 - Making decisions with if, otherwise and check
+
+ask "How old are you?" into age
+
+if age is less than 13 then
+    say "You are a kid!"
+otherwise if age is less than 20 then
+    say "You are a teenager!"
+otherwise if age is at least 100 then
+    say "Wow, over a hundred!"
+otherwise
+    say "You are a grown-up."
+end
+
+if age is even then say "{age} is an even number."
+if age is between 18 and 30 then say "Twenties vibes."
+
+ask "What is your favourite color?" into favourite
+check favourite
+    is "red", "orange"
+        say "A warm color!"
+    is "blue", "green"
+        say "A cool color!"
+    otherwise
+        say "{favourite}? Nice choice."
+end

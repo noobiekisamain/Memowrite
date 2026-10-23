@@ -1,0 +1,53 @@
+# 11 - A calculator app with buttons
+
+make window calc titled "Memowrite Calculator" sized 320 by 430 fixed
+add input box screen to calc
+set size of screen to 22
+
+make list keys with "7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", ".", "=", "+"
+set x to 10
+set y to 70
+for each key in keys
+    add button to calc saying key doing pressed at x, y sized 66 by 66
+    add 74 to x
+    if x is more than 250 then
+        set x to 10
+        add 74 to y
+    end
+end
+add button clearButton to calc saying "Clear" doing clear_screen at 10, 370 sized 288 by 40 background "tomato"
+
+# every number button runs this task and tells it which key was pressed
+make task pressed with key
+    if key is "=" then
+        try
+            set text of screen to calculate(text of screen)
+        if it fails
+            set text of screen to "Error"
+        end
+    otherwise
+        set text of screen to text of screen + key
+    end
+end
+
+make task clear_screen
+    set text of screen to ""
+end
+
+# a tiny calculator brain: numbers and + - * / from left to right, * and / first
+make task calculate with expression
+    set parts to find_all(expression, "[0-9.]+|[-+*/]")
+    set stack to []
+    set op to "+"
+    for each part in parts
+        if part is a number then
+            if op is "+" then put number(part) into stack
+            if op is "-" then put -number(part) into stack
+            if op is "*" then set stack[-1] to stack[-1] * number(part)
+            if op is "/" then set stack[-1] to stack[-1] / number(part)
+        otherwise
+            set op to part
+        end
+    end
+    give back round(sum(stack), 8)
+end

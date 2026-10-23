@@ -1,0 +1,29 @@
+# 15 - Animation: a bouncing ball (and a trail of colors)
+
+make window app titled "Bouncing Ball" sized 620 by 480
+add canvas box to app sized 600 by 400 background "night"
+draw circle on box at 300, 200 size 22 color "orange" called ball
+add label info to app saying "Click the canvas to change the color"
+
+set dx to 5
+set dy to 3.5
+set bounces to 0
+
+every 16 milliseconds do step
+when mouse is clicked on box do recolor_ball
+
+make task step
+    move ball by dx, dy
+    bounce ball inside box using dx, dy
+    if ball touches "edge" then
+        add 1 to bounces
+        set text of info to "Bounces: {bounces}"
+    end
+    if bounces is more than 0 and bounces mod 5 is 0 then
+        draw dot on box at x of ball, y of ball size 2 color "white"
+    end
+end
+
+make task recolor_ball with x, y
+    set color of ball to random_color()
+end

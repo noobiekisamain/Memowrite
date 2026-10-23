@@ -1,0 +1,8 @@
+# 01 - Hello!  Your first Memowrite program.
+# Press F5 (in Memowrite Studio) to run it.
+
+say "Hello, world!"
+ask "What is your name?" into name
+say "Nice to meet you, {name}!"
+say "Your name has {length of name} letters."
+say "In capitals it is " + uppercase of name

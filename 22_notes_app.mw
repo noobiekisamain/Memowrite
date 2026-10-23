@@ -1,0 +1,62 @@
+# 22 - A notes app with tabs, a text editor, menus and files
+
+make window notes titled "Memo Notes" sized 600 by 480
+menu "File" in notes with "Open..." doing open_note, "Save as..." doing save_note, "Quit" doing quit_app
+menu "Help" in notes with "About" doing about
+
+add tabs pages to notes
+add tab writeTab to pages saying "Write"
+add tab statsTab to pages saying "Stats"
+
+add text box editor to writeTab rows 14
+add row bar to writeTab
+add button to bar saying "Count words" doing count_now
+add button to bar saying "UPPERCASE" doing shout background "darkorange"
+add button to bar saying "Save" doing save_note background "seagreen"
+
+add label stats to statsTab saying "Press 'Count words' to see stats." wrap
+add progress goal to statsTab
+add label goalText to statsTab saying "Goal: 100 words"
+
+recall "draft" into draft or "Start typing your notes here..."
+set text of editor to draft
+when editor is changed do autosave
+
+make task autosave
+    remember "draft" as text of editor
+end
+
+make task count_now
+    set words to count_words(text of editor)
+    set text of stats to "Words: {words}" + "\n" + "Letters: {length of text of editor}" + "\n" + "Lines: {length of lines(text of editor)}"
+    set value of goal to min(100, words)
+    set text of goalText to "Goal: {words} / 100 words"
+end
+
+make task shout
+    set text of editor to uppercase of text of editor
+end
+
+make task save_note
+    set where to pick_save_file()
+    if where is not empty then
+        write text of editor to file where
+        show message "Saved!"
+    end
+end
+
+make task open_note
+    set where to pick_file()
+    if where is not empty then
+        read file where into contents
+        set text of editor to contents
+    end
+end
+
+make task about
+    show message "Memo Notes - written in Memowrite." titled "About"
+end
+
+make task quit_app
+    close notes
+end

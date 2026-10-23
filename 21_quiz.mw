@@ -1,0 +1,25 @@
+# 21 - A quiz made from a list of books
+
+make list questions with ...
+    {"q": "What is 6 times 7?", "a": "42"}, ...
+    {"q": "What color do you get mixing blue and yellow?", "a": "green"}, ...
+    {"q": "How many legs does a spider have?", "a": "8"}, ...
+    {"q": "What is the capital of France?", "a": "Paris"}
+
+shuffle questions
+set score to 0
+for each question in questions
+    ask question["q"] into answer
+    if text(answer) is question["a"] then
+        say "Correct!"
+        add 1 to score
+    otherwise
+        say "Not quite - it was {question["a"]}."
+    end
+end
+say "You got {score} out of {length of questions}. " + progress_bar(score, length of questions, 10)
+recall "quiz best" into best or 0
+if score is more than best then
+    remember "quiz best" as score
+    say "New personal best!"
+end

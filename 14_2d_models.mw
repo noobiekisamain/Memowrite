@@ -1,0 +1,54 @@
+# 14 - 2D models: build a thing once, place it many times
+
+make window world titled "2D Models" sized 700 by 460
+add canvas board to world sized 680 by 420 background "lightcyan"
+draw rectangle on board at 0, 340 size 680 by 80 color "grass"
+
+make model tree
+    rectangle at -8, -10 size 16 by 50 color "wood"
+    circle at 0, -30 size 32 color "leaf"
+    circle at -18, -14 size 20 color "forestgreen"
+    circle at 18, -14 size 20 color "forestgreen"
+end
+
+make model car
+    roundbox at -45, -18 size 90 by 26 color "crimson" corner 8
+    roundbox at -25, -36 size 48 by 22 color "crimson" corner 8
+    rectangle at -18, -32 size 16 by 14 color "lightblue"
+    rectangle at 2, -32 size 16 by 14 color "lightblue"
+    circle at -25, 10 size 11 color "black"
+    circle at 25, 10 size 11 color "black"
+    circle at -25, 10 size 4 color "silver"
+    circle at 25, 10 size 4 color "silver"
+end
+
+make model robot
+    rectangle at -20, -40 size 40 by 50 color "silver" outline "dimgray" width 2
+    rectangle at -14, -70 size 28 by 24 color "silver" outline "dimgray" width 2
+    circle at -6, -58 size 4 color "red"
+    circle at 6, -58 size 4 color "red"
+    line from 0, -70 to 0, -82 color "dimgray" width 2
+    dot at 0, -84 size 4 color "orange"
+    rectangle at -16, 10 size 10 by 25 color "dimgray"
+    rectangle at 6, 10 size 10 by 25 color "dimgray"
+end
+
+count i from 0 to 6
+    place model tree on board at 60 + i * 100, 320 size 0.8 + random(0, 6) / 10
+end
+place model car on board at 120, 345 called redCar
+place model car on board at 420, 345 color "royalblue" called blueCar
+place model robot on board at 560, 318 called robo
+flip blueCar horizontally
+
+save model car to "car.mwmodel"
+load model sameCar from "car.mwmodel"
+place model sameCar on board at 300, 120 size 0.6 angle -15
+say "The car model is {width of car} wide and has {parts of car} parts."
+
+# drive the red car across the screen
+repeat 60 times
+    move redCar by 4, 0
+    turn robo by 6
+    wait 30 milliseconds
+end

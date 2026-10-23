@@ -1,0 +1,47 @@
+# 18 - Kinds: blueprints for making many similar things
+
+make kind pet with name, sound, hunger
+    make task speak
+        say "{my name} says {my sound}!"
+    end
+    make task feed with food
+        set my hunger to max(0, my hunger - 3)
+        say "{my name} ate the {food}. Hunger is now {my hunger}."
+    end
+    make task is_hungry
+        give back my hunger is more than 5
+    end
+end
+
+set rex to pet("Rex", "woof", 8)
+set tom to pet("Tom", "meow", 2)
+make list pets with rex, tom
+
+for each p in pets
+    p.speak()
+    if p.is_hungry() then
+        p.feed("biscuit")
+    otherwise
+        say "{p.name} is not hungry."
+    end
+end
+
+make kind bank_account with owner, money
+    make task deposit with amount
+        add amount to my money
+    end
+    make task withdraw with amount
+        ensure amount is at most my money or complain "Not enough money!"
+        take amount from my money
+    end
+end
+
+set account to bank_account("Gabriel", 100)
+account.deposit(50)
+account.withdraw(30)
+say "{account.owner} has {money(account.money)} in the bank."
+try
+    account.withdraw(1000)
+if it fails as problem
+    say "The bank said: " + problem
+end

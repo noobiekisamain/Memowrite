@@ -1,0 +1,7 @@
+{
+  "_about": "This is File.Memory - things a Memowrite program remembered. Every program gets its own File.Memory in its folder. Use: remember \"name\" as value / recall \"name\" into variable / forget \"name\".",
+  "welcome": "Hello from Memowrite!",
+  "installed": "1.0.0",
+  "example list": ["remember", "recall", "forget"],
+  "example book": {"high score": 0, "player": "you"}
+}

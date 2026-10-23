@@ -1,0 +1,54 @@
+{
+  "name": "memowrite",
+  "displayName": "Memowrite",
+  "description": "Memowrite language support: syntax colors, snippets, run button, and the Memowrite icon.",
+  "version": "1.0.0",
+  "publisher": "memowrite",
+  "license": "MIT",
+  "icon": "images/icon.png",
+  "engines": { "vscode": "^1.64.0" },
+  "categories": ["Programming Languages", "Snippets"],
+  "keywords": ["memowrite", "plain english", "beginner", "mw"],
+  "repository": { "type": "git", "url": "https://example.invalid/memowrite" },
+  "main": "./extension.js",
+  "activationEvents": ["onLanguage:memowrite", "onCommand:memowrite.run", "onCommand:memowrite.check", "onCommand:memowrite.studio"],
+  "contributes": {
+    "languages": [{
+      "id": "memowrite",
+      "aliases": ["Memowrite", "memowrite", "mw"],
+      "extensions": [".mw"],
+      "filenames": ["File.Memory"],
+      "configuration": "./language-configuration.json",
+      "icon": { "light": "./images/file-icon.png", "dark": "./images/file-icon.png" }
+    }],
+    "grammars": [{
+      "language": "memowrite",
+      "scopeName": "source.memowrite",
+      "path": "./syntaxes/memowrite.tmLanguage.json"
+    }],
+    "snippets": [{ "language": "memowrite", "path": "./snippets/memowrite.json" }],
+    "commands": [
+      { "command": "memowrite.run", "title": "Run Memowrite Program", "category": "Memowrite", "icon": "$(play)" },
+      { "command": "memowrite.check", "title": "Check Program for Mistakes", "category": "Memowrite", "icon": "$(check)" },
+      { "command": "memowrite.studio", "title": "Open in Memowrite Studio", "category": "Memowrite" }
+    ],
+    "menus": {
+      "editor/title/run": [{ "command": "memowrite.run", "when": "editorLangId == memowrite", "group": "navigation" }],
+      "editor/title": [{ "command": "memowrite.check", "when": "editorLangId == memowrite", "group": "navigation" }]
+    },
+    "keybindings": [
+      { "command": "memowrite.run", "key": "ctrl+f5", "when": "editorLangId == memowrite" },
+      { "command": "memowrite.check", "key": "f7", "when": "editorLangId == memowrite" }
+    ],
+    "configuration": {
+      "title": "Memowrite",
+      "properties": {
+        "memowrite.command": {
+          "type": "string",
+          "default": "memowrite",
+          "description": "The command used to run Memowrite programs (the installer adds 'memowrite' to your PATH)."
+        }
+      }
+    }
+  }
+}
